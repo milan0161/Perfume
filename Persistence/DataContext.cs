@@ -1,10 +1,11 @@
-﻿using Bogus;
+﻿using Application.Interfaces;
+using Bogus;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistence
 {
-    public class DataContext : DbContext
+    public class DataContext : DbContext, IDataContext
     {
         public DbSet<Perfume> Perfumes { get; set; }
 
