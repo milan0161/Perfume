@@ -7,5 +7,6 @@
         public string Brand { get; set; }
         public float Volume { get; set; }
         public string Scent { get; set; }
+        public string ImageUrl { get; set; }
     }
 }
