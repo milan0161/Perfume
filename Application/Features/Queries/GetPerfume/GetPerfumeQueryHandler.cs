@@ -13,15 +13,16 @@ namespace Application.Features.Queries.GetPerfume
         {
             this._context = context;
         }
+
         public async Task<Perfume?> Handle(GetPerfumeQuery request, CancellationToken cancellationToken)
         {
             Perfume? perfume;
+
             try
             {
                  perfume = await _context.Perfumes.SingleOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
     
                  return perfume;
-                
             }
             catch (InvalidOperationException ex)
             {
@@ -31,7 +32,6 @@ namespace Application.Features.Queries.GetPerfume
             {
                 throw new ArgumentNullException("Perfume not found", ex);
             }
-            
         }
     }
 }
