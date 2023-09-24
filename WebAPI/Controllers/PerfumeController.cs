@@ -1,4 +1,6 @@
-﻿using Application.Features.Queries.GetPerfume;
+﻿using Application.DTOs;
+using Application.Features.Queries.FilterPerfumes;
+using Application.Features.Queries.GetPerfume;
 using Domain;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -29,6 +31,19 @@ namespace WebAPI.Controllers
                 return Ok(perfume); 
             }
             return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult<List<Perfume>>> GetPerfumesAsync(
+            [FromBody] PerfumeFilterDto? perfumeFilter,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] int pageNumber = 1            
+            )
+        {
+            var getPerfumesQuery = new FilterPerfumeQuery(pageSize, pageNumber, perfumeFilter);
+            var perfumes = await this._mediator.Send(getPerfumesQuery);
+
+            return Ok(perfumes);
         }
     }
 }
