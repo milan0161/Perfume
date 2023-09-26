@@ -5,14 +5,14 @@ using FluentAssertions;
 using Moq;
 using Moq.EntityFrameworkCore;
 
-namespace Tests
+namespace Tests.Features
 {
     public class GetPerfumeQueryHandlerTests
     {
         private GetPerfumeQueryHandler systemUnderTest;
         private Mock<IDataContext> dataContextMock;
 
-        
+
         [SetUp]
         public void Setup()
         {
@@ -31,7 +31,7 @@ namespace Tests
             // Arrange
             int id = 1;
             string brand = "Armany";
-            List<Perfume> perfumes = new List<Perfume> { new () { Id = id, Brand = brand} };
+            List<Perfume> perfumes = new List<Perfume> { new() { Id = id, Brand = brand } };
 
             dataContextMock.Setup(x => x.Perfumes).ReturnsDbSet(perfumes);
 
