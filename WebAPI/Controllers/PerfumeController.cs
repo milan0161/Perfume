@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Features.Commands.CreatePerfume;
 using Application.Features.Queries.FilterPerfumes;
 using Application.Features.Queries.GetPerfume;
 using Domain;
@@ -45,5 +46,15 @@ namespace WebAPI.Controllers
 
             return Ok(perfumes);
         }
+
+        [HttpPost("create")]
+        public async Task<ActionResult<Perfume>> CreatePerfumeAsync([FromBody] CreatePerfumeDto createPerfumeDto)
+        {
+            var createPerfumeCommand = new CreatePerfumeCommand(createPerfumeDto);
+            var perfume = await this._mediator.Send(createPerfumeCommand);
+
+            return Ok(perfume);
+        }
+
     }
 }

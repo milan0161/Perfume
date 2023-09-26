@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application.Exceptions;
+using Application.Interfaces;
 using Domain;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace Application.Features.Queries.GetPerfume
             }
             catch (ArgumentNullException ex)
             {
-                throw new ArgumentNullException("Perfume not found", ex);
+                throw new EntityNotFoundException("Perfume not found", ex);
             }
         }
     }
