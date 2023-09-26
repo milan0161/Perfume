@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Features.Commands.DeletePerfume;
 using Application.Features.Commands.UpdatePerfume;
 using Application.Features.Queries.FilterPerfumes;
 using Application.Features.Queries.GetPerfume;
@@ -53,6 +54,15 @@ namespace WebAPI.Controllers
             var perfume = await this._mediator.Send(updatePerfumeCommand);
 
             return Ok(perfume);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePerfumeAsync([FromRoute] int id)
+        {
+            var deletePerfumeCommand = new DeletePerfumeCommand(id);
+            await this._mediator.Send(deletePerfumeCommand);
+
+            return NoContent();
         }
     }
 }
