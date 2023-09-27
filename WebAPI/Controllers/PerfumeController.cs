@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+using Application.DTOs;
 using Application.Features.Commands.CreatePerfume;
 using Application.Features.Commands.DeletePerfume;
 using Application.Features.Commands.UpdatePerfume;
@@ -48,7 +48,6 @@ namespace WebAPI.Controllers
             return Ok(perfumes);
         }
 
-
         [HttpPost("create")]
         public async Task<ActionResult<Perfume>> CreatePerfumeAsync([FromBody] CreatePerfumeDto createPerfumeDto)
         {
@@ -58,7 +57,6 @@ namespace WebAPI.Controllers
             return Ok(perfume);
         }
 
-
         [HttpPost("update")]
         public async Task<ActionResult<Perfume>> UpdatePerfumeAsync(UpdatePerfumeDto updatePerfumeDto)
         {
@@ -67,7 +65,7 @@ namespace WebAPI.Controllers
 
             return Ok(perfume);
         }
-        
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeletePerfumeAsync([FromRoute] int id)
         {
