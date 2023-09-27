@@ -1,9 +1,10 @@
 ﻿using Application.DTOs;
+using Application.Features.Commands.DeletePerfume;
+using Application.Features.Commands.UpdatePerfume;
 using Application.Features.Queries.FilterPerfumes;
 using Application.Features.Queries.GetPerfume;
 using Domain;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -44,6 +45,24 @@ namespace WebAPI.Controllers
             var perfumes = await this._mediator.Send(getPerfumesQuery);
 
             return Ok(perfumes);
+        }
+
+        [HttpPost("update")]
+        public async Task<ActionResult<Perfume>> UpdatePerfumeAsync(UpdatePerfumeDto updatePerfumeDto)
+        {
+            var updatePerfumeCommand = new UpdatePerfumeCommand(updatePerfumeDto);
+            var perfume = await this._mediator.Send(updatePerfumeCommand);
+
+            return Ok(perfume);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeletePerfumeAsync([FromRoute] int id)
+        {
+            var deletePerfumeCommand = new DeletePerfumeCommand(id);
+            await this._mediator.Send(deletePerfumeCommand);
+
+            return NoContent();
         }
     }
 }
