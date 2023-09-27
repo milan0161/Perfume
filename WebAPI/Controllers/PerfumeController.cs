@@ -1,4 +1,5 @@
 ﻿using Application.DTOs;
+using Application.Features.Commands.CreatePerfume;
 using Application.Features.Commands.DeletePerfume;
 using Application.Features.Commands.UpdatePerfume;
 using Application.Features.Queries.FilterPerfumes;
@@ -46,6 +47,17 @@ namespace WebAPI.Controllers
 
             return Ok(perfumes);
         }
+
+
+        [HttpPost("create")]
+        public async Task<ActionResult<Perfume>> CreatePerfumeAsync([FromBody] CreatePerfumeDto createPerfumeDto)
+        {
+            var createPerfumeCommand = new CreatePerfumeCommand(createPerfumeDto);
+            var perfume = await this._mediator.Send(createPerfumeCommand);
+
+            return Ok(perfume);
+        }
+
 
         [HttpPost("update")]
         public async Task<ActionResult<Perfume>> UpdatePerfumeAsync(UpdatePerfumeDto updatePerfumeDto)
